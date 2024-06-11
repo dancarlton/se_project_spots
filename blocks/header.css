@@ -9,3 +9,16 @@
   width: 94px;
   height: 26px;
 }
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .header__logo {
+    margin-bottom: 10px;
+    display: flex;
+  }
+}

@@ -1,5 +1,6 @@
 .cards {
-  padding-top: 20px;
+  padding: 20px 0 40px;
+  border-bottom: 1px rgba(33, 33, 33, 0.4) solid;
 }
 
 .cards__list {
@@ -10,4 +11,19 @@
   grid-template-columns: repeat(auto-fit, 413px);
   gap: 40px 20px;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  /* .cards {
+    max-width: 100%;
+    flex: 1 1 calc(100% - 32px);
+  }
+
+  .card__title {
+    font-size: 16px;
+  }
+
+  .card__like-button {
+    width: 20px;
+  } */
 }

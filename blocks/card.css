@@ -29,3 +29,18 @@
   background-color: transparent;
   opacity: 0.4;
 }
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+    flex: 1 1 calc(100% - 32px);
+  }
+
+  .card__title {
+    font-size: 16px;
+  }
+
+  .card__like-button {
+    width: 20px;
+  }
+}

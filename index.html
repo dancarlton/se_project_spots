@@ -17,10 +17,6 @@
     <link rel="icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <div class="page">
@@ -38,11 +34,19 @@
             <h1 class="profile__title">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
             <button class="profile__edit-button">
-              <img src="./images/pencil.svg" alt="Pencil Image" />Edit Profile
+              <img
+                src="./images/pencil.svg"
+                alt="Pencil Image"
+                class="profile__edit-icon"
+              />Edit Profile
             </button>
           </div>
           <button class="profile__add-button">
-            <img src="./images/plus.svg" alt="Plus Image" />New Post
+            <img
+              src="./images/plus.svg"
+              alt="Plus Image"
+              class="profile__add-icon"
+            />New Post
           </button>
         </section>
         <section class="cards page__section">
@@ -60,63 +64,67 @@
             </li>
             <li class="card">
               <img
-                src="./images/1-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Val Thorens"
+                src="./images/2-photo-by-ceiline-from-pexels.jpg"
+                alt="Restaurant terrace"
                 class="card__image"
               />
               <div class="card__content">
-                <h2 class="card__title">Val Thorens</h2>
+                <h2 class="card__title">Restaurant terrace</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
             </li>
             <li class="card">
               <img
-                src="./images/1-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Val Thorens"
+                src="./images/3-photo-by-tubanur-dogan-from-pexels.jpg"
+                alt="An outdoor cafe"
                 class="card__image"
               />
               <div class="card__content">
-                <h2 class="card__title">Val Thorens</h2>
+                <h2 class="card__title">An outdoor cafe</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
             </li>
             <li class="card">
               <img
-                src="./images/1-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Val Thorens"
+                src="./images/4-photo-by-maurice-laschet-from-pexels.jpg"
+                alt="A very long bridge, over the forest..."
                 class="card__image"
               />
               <div class="card__content">
-                <h2 class="card__title">Val Thorens</h2>
+                <h2 class="card__title">
+                  A very long bridge, over the forest...
+                </h2>
                 <button type="button" class="card__like-button"></button>
               </div>
             </li>
             <li class="card">
               <img
-                src="./images/1-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Val Thorens"
+                src="./images/5-photo-by-van-anh-nguyen-from-pexels.jpg"
+                alt="Tunnel with morning light"
                 class="card__image"
               />
               <div class="card__content">
-                <h2 class="card__title">Val Thorens</h2>
+                <h2 class="card__title">Tunnel with morning light</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
             </li>
             <li class="card">
               <img
-                src="./images/1-photo-by-moritz-feldmann-from-pexels.jpg"
-                alt="Val Thorens"
+                src="./images/6-photo-by-moritz-feldmann-from-pexels.jpg"
+                alt="Mountain house"
                 class="card__image"
               />
               <div class="card__content">
-                <h2 class="card__title">Val Thorens</h2>
+                <h2 class="card__title">Mountain house</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
             </li>
           </ul>
         </section>
       </main>
-      <footer class="footer"></footer>
+      <footer class="footer page__section">
+        <p class="footer__copyright">&copy; 2024 Dan Carlton</p>
+      </footer>
     </div>
   </body>
 </html>
