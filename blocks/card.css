@@ -19,6 +19,7 @@
 .card__title {
   font-size: 20px;
   font-weight: 400;
+  line-height: 1.2;
 }
 
 .card__like-button {
@@ -28,19 +29,39 @@
   border: none;
   background-color: transparent;
   opacity: 0.4;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 12px 12px;
 }
 
 @media (max-width: 768px) {
   .card {
-    max-width: 100%;
+    max-width: 288px;
     flex: 1 1 calc(100% - 32px);
   }
 
   .card__title {
     font-size: 16px;
+    line-height: 1.2;
   }
 
   .card__like-button {
     width: 20px;
+    height: 18px;
+  }
+
+  .card__image {
+    width: 288px;
+    height: 288px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .block {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 }

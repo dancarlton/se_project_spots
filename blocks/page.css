@@ -9,3 +9,13 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+@media (max-width: 768px) {
+  .page {
+    max-width: 768px;
+  }
+
+  .page__section {
+    width: 288px;
+  }
+}
