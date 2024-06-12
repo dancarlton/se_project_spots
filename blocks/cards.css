@@ -18,24 +18,8 @@
     max-width: 100%;
   }
 
-  .card__title {
-    font-size: 16px;
-  }
-
-  .card__like-button {
-    width: 20px;
-  }
-
   .cards__list {
     grid-template-columns: repeat(auto-fit, 288px);
     gap: 20px 20px;
-  }
-
-  .block {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
   }
 }

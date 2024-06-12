@@ -16,6 +16,6 @@
   }
 
   .page__section {
-    width: 288px;
+    max-width: 100%;
   }
 }

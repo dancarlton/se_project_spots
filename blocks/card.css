@@ -4,7 +4,7 @@
 
 .card__image {
   width: 413px;
-  height: 445px;
+  height: 413px;
   object-fit: cover;
   display: block;
   border-radius: 8px;
@@ -20,6 +20,9 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 1.2;
+  display: block;
+  white-space: nowrap;
+  max-width: 90%;
 }
 
 .card__like-button {
@@ -32,6 +35,13 @@
   background-repeat: no-repeat;
   background-position: center;
   padding: 12px 12px;
+}
+
+.card__like-button:hover {
+  /* do i use the svg file here? if so, how do i resize it? */
+  /* cursor: url("../images/pointer.svg"), pointer; */
+  cursor: pointer;
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -55,13 +65,5 @@
     height: 288px;
     display: flex;
     justify-content: center;
-  }
-
-  .block {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
   }
 }
