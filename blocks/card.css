@@ -23,6 +23,7 @@
   display: block;
   white-space: nowrap;
   max-width: 90%;
+  margin: 0;
 }
 
 .card__like-button {
