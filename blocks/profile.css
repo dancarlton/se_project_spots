@@ -13,6 +13,7 @@
 
 .profile__column {
   flex-direction: column;
+  display: flex;
 }
 
 .profile__title {
@@ -123,6 +124,7 @@
     align-items: center;
     text-align: center;
     padding: 5px;
+    font-size: 20px;
   }
 
   .profile__description {
