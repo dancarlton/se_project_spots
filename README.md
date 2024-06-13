@@ -28,3 +28,7 @@ This project is a web application that allows users to explore various spots. Th
 ## Deployment
 
 The project is deployed on GitHub Pages. You can view it [here](https://dancarlton.github.io/se_project_spots/).
+
+## Presentation
+
+I have recorded a presentation showcasing how I built the project, the challenges I faced, and the technologies used. You can watch it [here](https://drive.google.com/file/d/1zAnwOlS6pAHvYUQickymTOcc3dHBb2Oc/view?usp=sharing).
