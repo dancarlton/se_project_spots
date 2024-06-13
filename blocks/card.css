@@ -24,6 +24,7 @@
   white-space: nowrap;
   max-width: 90%;
   margin: 0;
+  margin-top: 12px;
 }
 
 .card__like-button {
