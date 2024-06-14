@@ -107,7 +107,7 @@
 
   .profile__avatar {
     margin: 0;
-    padding-bottom: 20px;
+    margin-bottom: 12px;
     height: 80px;
     width: 80px;
     object-fit: cover;
@@ -123,7 +123,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 5px;
+    margin-bottom: 6px;
     font-size: 20px;
   }
 

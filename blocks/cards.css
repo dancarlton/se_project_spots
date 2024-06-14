@@ -16,10 +16,11 @@
 @media (max-width: 768px) {
   .cards {
     max-width: 100%;
+    padding: 20px 0 20px;
   }
 
   .cards__list {
     grid-template-columns: repeat(auto-fit, 288px);
-    gap: 60px 60px;
+    gap: 20px 20px;
   }
 }
