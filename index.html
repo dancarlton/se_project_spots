@@ -37,6 +37,7 @@
           </div>
           <button type="button" class="profile__add-button">New Post</button>
         </section>
+
         <section class="cards page__section">
           <ul class="cards__list">
             <li class="card">
@@ -113,6 +114,43 @@
       <footer class="footer page__section">
         <p class="footer__copyright">&copy; 2024 Dan Carlton</p>
       </footer>
+      <div class="modal modal_opened">
+        <div class="modal__container">
+          <button type="button" class="modal__close-button">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M20 0v40M0 20h40"
+                fill="none"
+                stroke="#212121"
+                stroke-width="4"
+                transform="rotate(45 20 20)"
+              />
+            </svg>
+          </button>
+          <h2 class="modal__title">Edit profile</h2>
+          <form name="edit-profile" class="modal__form">
+            <label for="name" class="modal__label">
+              Name
+              <input
+                id="name"
+                type="text"
+                class="modal__input"
+                placeholder="Type your name"
+              />
+            </label>
+            <label for="description" class="modal__label">
+              Description
+              <input
+                id="description"
+                type="text"
+                class="modal__input"
+                placeholder="Describe yourself"
+              />
+            </label>
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
     </div>
 
     <script src="scripts/index.js" defer></script>
