@@ -77,14 +77,10 @@ function getCardElement(data) {
 
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
+  cardImage.alt = data.name;
 
   return cardElement;
 }
-
-getCardElement({
-  name: "Mountain house",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-});
 
 for (i = 0; i < initialCards.length; i++) {
   getCardElement(initialCards[i]);
