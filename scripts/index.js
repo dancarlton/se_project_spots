@@ -63,3 +63,23 @@ function handleProfileFormSubmit(event) {
 }
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+// Card Element
+const cardTemplate = document.querySelector("#card-template");
+const cardList = document.querySelector(".cards__list");
+
+function getCardElement(data) {
+  const cardElement = cardTemplate.content.firstElementChild.cloneNode(true);
+  const cardTitle = cardElement.querySelector(".card__title");
+  const cardImage = cardElement.querySelector(".card__image");
+
+  cardTitle.textContent = data.name;
+  cardImage.src = data.link;
+
+  return cardElement;
+}
+
+getCardElement({
+  name: "Mountain house",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
+});

@@ -114,6 +114,8 @@
       <footer class="footer page__section">
         <p class="footer__copyright">&copy; 2024 Dan Carlton</p>
       </footer>
+
+      <!-- Edit Profile Modal -->
       <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
           <button
@@ -156,6 +158,17 @@
         </div>
       </div>
     </div>
+
+    <!-- Card Template -->
+    <template id="card-template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__content">
+          <h2 class="card__title block"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="scripts/index.js" defer></script>
   </body>
