@@ -83,5 +83,6 @@ function getCardElement(data) {
 }
 
 for (i = 0; i < initialCards.length; i++) {
-  getCardElement(initialCards[i]);
+  const cardElement = getCardElement(initialCards[i]);
+  cardList.prepend(cardElement);
 }
