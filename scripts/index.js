@@ -25,7 +25,7 @@ const initialCards = [
   },
 ];
 
-// Variables
+// Profile Elements
 const profileEditButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const profileCloseButton = document.querySelector("#close-profile-modal");
@@ -35,6 +35,7 @@ const jobInput = document.querySelector("#edit-profile-input-description");
 const profileNameElement = document.querySelector(".profile__title");
 const profileJobElement = document.querySelector(".profile__description");
 
+// New Post Elements
 const newPostButton = document.querySelector(".profile__add-button");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseButton = document.querySelector("#close-new-post-modal");
@@ -76,7 +77,7 @@ profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 newPostFormElement.addEventListener("submit", handleNewPostFormSubmit);
 
-// Form Submission
+// Form Submissions
 function handleProfileFormSubmit(event) {
   event.preventDefault();
 
@@ -90,11 +91,14 @@ function handleNewPostFormSubmit(event) {
   event.preventDefault();
 
   const newCardData = {
-    name: newPostName.value,
-    link: newPostLink.value,
+    name: newPostNameInput.value,
+    link: newPostLinkInput.value,
   };
 
-  closeModal(editProfileModal);
+  const cardElement = getCardElement(newCardData);
+  cardList.append(cardElement);
+
+  closeModal(newPostModal);
 }
 
 // Card Element
