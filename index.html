@@ -70,6 +70,7 @@
               Name
               <input
                 id="edit-profile-input-name"
+                name="name"
                 type="text"
                 class="modal__input"
                 placeholder="Type your name"
@@ -79,9 +80,55 @@
               Description
               <input
                 id="edit-profile-input-description"
+                name="description"
                 type="text"
                 class="modal__input"
                 placeholder="Describe yourself"
+              />
+            </label>
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- New Post Modal -->
+      <div class="modal" id="new-post-modal">
+        <div class="modal__container">
+          <button
+            type="button"
+            class="modal__close-button"
+            id="close-new-post-modal"
+          >
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M20 0v40M0 20h40"
+                fill="none"
+                stroke="#212121"
+                stroke-width="4"
+                transform="rotate(45 20 20)"
+              />
+            </svg>
+          </button>
+          <h2 class="modal__title">New post</h2>
+          <form name="new-post" class="modal__form" id="new-post-form">
+            <label for="new-post-image-link" class="modal__label">
+              Image link
+              <input
+                id="new-post-image-link"
+                name="link"
+                type="url"
+                class="modal__input"
+                placeholder="Paste a link to the picture"
+              />
+            </label>
+            <label for="new-post-input-description" class="modal__label">
+              Caption
+              <input
+                id="new-post-input-description"
+                name="input-description"
+                type="text"
+                class="modal__input"
+                placeholder="Type your caption"
               />
             </label>
             <button type="submit" class="modal__submit-button">Save</button>
@@ -93,9 +140,9 @@
     <!-- Card Template -->
     <template id="card-template">
       <li class="card">
-        <img src="" alt="" class="card__image" />
+        <img id="card-link" src="" alt="" class="card__image" />
         <div class="card__content">
-          <h2 class="card__title block"></h2>
+          <h2 id="card-name" class="card__title block"></h2>
           <button type="button" class="card__like-button"></button>
         </div>
       </li>
