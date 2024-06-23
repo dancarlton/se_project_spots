@@ -113,6 +113,7 @@ function getCardElement(data) {
   const cardImage = cardElement.querySelector(".card__image");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  const cardModal = cardElement.querySelector(".card__modal");
 
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
