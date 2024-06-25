@@ -30,8 +30,10 @@ const profileEditButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const profileCloseButton = document.querySelector("#close-profile-modal");
 const profileFormElement = document.querySelector("#edit-profile-form");
-const nameInput = document.querySelector("#edit-profile-input-name");
-const jobInput = document.querySelector("#edit-profile-input-description");
+const profileNameInput = document.querySelector("#edit-profile-input-name");
+const profileJobInput = document.querySelector(
+  "#edit-profile-input-description"
+);
 const profileNameElement = document.querySelector(".profile__title");
 const profileJobElement = document.querySelector(".profile__description");
 
@@ -40,7 +42,9 @@ const newPostButton = document.querySelector(".profile__add-button");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostCloseButton = document.querySelector("#close-new-post-modal");
 const newPostLinkInput = document.querySelector("#new-post-image-link");
-const newPostNameInput = document.querySelector("#new-post-input-description");
+const newPostprofileNameInput = document.querySelector(
+  "#new-post-input-description"
+);
 const newPostFormElement = document.querySelector("#new-post-form");
 const newPostLink = document.querySelector("#card-link");
 const newPostName = document.querySelector("#card-name");
@@ -56,8 +60,8 @@ function closeModal(modal) {
 
 // Event Listeners
 profileEditButton.addEventListener("click", () => {
-  nameInput.value = profileNameElement.textContent;
-  jobInput.value = profileJobElement.textContent;
+  profileNameInput.value = profileNameElement.textContent;
+  profileJobInput.value = profileJobElement.textContent;
   openModal(editProfileModal);
 });
 
@@ -81,8 +85,8 @@ newPostFormElement.addEventListener("submit", handleNewPostFormSubmit);
 function handleProfileFormSubmit(event) {
   event.preventDefault();
 
-  profileNameElement.textContent = nameInput.value;
-  profileJobElement.textContent = jobInput.value;
+  profileNameElement.textContent = profileNameInput.value;
+  profileJobElement.textContent = profileJobInput.value;
 
   closeModal(editProfileModal);
 }
@@ -91,7 +95,7 @@ function handleNewPostFormSubmit(event) {
   event.preventDefault();
 
   const newCardData = {
-    name: newPostNameInput.value,
+    name: newPostprofileNameInput.value,
     link: newPostLinkInput.value,
   };
 
@@ -107,9 +111,9 @@ function handleNewPostFormSubmit(event) {
 const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".cards__list");
 const cardModal = document.querySelector("#preview-modal");
-const modalImage = cardModal.querySelector(".modal__image");
-const modalCloseButton = cardModal.querySelector(".modal__close-button");
-const modalCaption = cardModal.querySelector(".modal__caption");
+const cardModalImage = cardModal.querySelector(".modal__image");
+const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
+const cardModalCaption = cardModal.querySelector(".modal__caption");
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -133,16 +137,16 @@ function getCardElement(data) {
   });
 
   cardImage.addEventListener("click", () => {
-    modalCaption.textContent = data.name;
-    modalImage.src = data.link;
-    modalImage.alt = data.name;
+    cardModalCaption.textContent = data.name;
+    cardModalImage.src = data.link;
+    cardModalImage.alt = data.name;
     openModal(cardModal);
   });
 
   return cardElement;
 }
 
-modalCloseButton.addEventListener("click", () => {
+cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
 });
 
