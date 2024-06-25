@@ -84,6 +84,8 @@ function handleProfileFormSubmit(event) {
   profileNameElement.textContent = nameInput.value;
   profileJobElement.textContent = jobInput.value;
 
+  newPostFormElement.reset();
+
   closeModal(editProfileModal);
 }
 
@@ -96,7 +98,7 @@ function handleNewPostFormSubmit(event) {
   };
 
   const cardElement = getCardElement(newCardData);
-  cardList.append(cardElement);
+  cardList.prepend(cardElement);
 
   closeModal(newPostModal);
 }
@@ -106,7 +108,7 @@ const cardTemplate = document.querySelector("#card-template");
 const cardList = document.querySelector(".cards__list");
 const cardModal = document.querySelector("#preview-modal");
 const modalImage = cardModal.querySelector(".modal__image");
-const modalCloseButton = cardModal.querySelector(".modal__close");
+const modalCloseButton = cardModal.querySelector(".modal__close-button");
 const modalCaption = cardModal.querySelector(".modal__caption");
 
 function getCardElement(data) {
