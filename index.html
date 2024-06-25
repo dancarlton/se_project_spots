@@ -39,11 +39,6 @@
         </section>
 
         <section class="cards page__section">
-          <div class="card__modal">
-            <button class="card__modal-close-icon"></button>
-            <img src="" alt="" class="card__modal-image" />
-            <h2 class="card__modal-description"></h2>
-          </div>
           <ul class="cards__list"></ul>
         </section>
       </main>
@@ -153,6 +148,18 @@
         </div>
       </li>
     </template>
+
+    <!-- Card Modal -->
+    <div class="modal modal-opened" id="preview-modal">
+      <div class="modal__content">
+        <button
+          class="modal__close modal__close_type_preview"
+          type="button"
+        ></button>
+        <img src="" alt="" class="modal__image" />
+        <p class="modal__caption"></p>
+      </div>
+    </div>
 
     <script src="scripts/index.js" defer></script>
   </body>
