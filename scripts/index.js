@@ -84,8 +84,6 @@ function handleProfileFormSubmit(event) {
   profileNameElement.textContent = nameInput.value;
   profileJobElement.textContent = jobInput.value;
 
-  newPostFormElement.reset();
-
   closeModal(editProfileModal);
 }
 
@@ -99,6 +97,8 @@ function handleNewPostFormSubmit(event) {
 
   const cardElement = getCardElement(newCardData);
   cardList.prepend(cardElement);
+
+  newPostFormElement.reset();
 
   closeModal(newPostModal);
 }
