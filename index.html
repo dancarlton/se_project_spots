@@ -74,7 +74,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your name"
+                required
+                minlength="2"
+                maxlength="40"
               />
+              <span class="modal__error">Error!!!</span>
             </label>
             <label for="edit-profile-input-description" class="modal__label">
               Description
@@ -84,7 +88,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Describe yourself"
+                required
+                minlength="2"
+                maxlength="200"
               />
+              <span class="modal__error">Error!!!</span>
             </label>
             <button type="submit" class="modal__submit-button">Save</button>
           </form>
@@ -119,7 +127,9 @@
                 type="url"
                 class="modal__input"
                 placeholder="Paste a link to the picture"
+                required
               />
+              <span class="modal__error">Error!!!</span>
             </label>
             <label for="new-post-input-description" class="modal__label">
               Caption
@@ -129,7 +139,11 @@
                 type="text"
                 class="modal__input"
                 placeholder="Type your caption"
+                required
+                minlength="2"
+                maxlength="30"
               />
+              <span class="modal__error">Error!!!</span>
             </label>
             <button type="submit" class="modal__submit-button">Save</button>
           </form>
@@ -162,5 +176,6 @@
     </div>
 
     <script src="scripts/index.js" defer></script>
+    <script src="scripts/validation.js"></script>
   </body>
 </html>
