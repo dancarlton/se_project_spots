@@ -84,6 +84,11 @@
   font-size: 20px;
 }
 
+.modal__input_type_error {
+  border: 1px solid #ff0000;
+  opacity: 0.6;
+}
+
 .modal__submit-button {
   width: 156px;
   padding: 18px 0;
