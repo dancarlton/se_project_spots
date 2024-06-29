@@ -3,14 +3,14 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     `#${inputElement.id}-error`
   );
   errorMessageElement.textContent = errorMessage;
-  inputElement.classList.add("#modal__input_type_error");
+  inputElement.classList.add("modal__input_type_error");
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorMessageElement = formElement.querySelector(
     `#${inputElement.id}-error`
   );
-  inputElement.classList.remove("#modal__input_type_error");
+  inputElement.classList.remove("modal__input_type_error");
   errorMessageElement.textContent = "";
 };
 
