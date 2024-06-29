@@ -52,10 +52,12 @@ const newPostName = document.querySelector("#card-name");
 // Functions
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalOnEsc);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalOnEsc);
 }
 
 // Event Listeners
@@ -103,7 +105,7 @@ function handleNewPostFormSubmit(event) {
   cardList.prepend(cardElement);
 
   newPostFormElement.reset();
-
+  // toggleButtonState(buttonElement);
   closeModal(newPostModal);
 }
 
@@ -149,6 +151,17 @@ function getCardElement(data) {
 cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
 });
+
+cardModalImage.addEventListener("click", () => {
+  closeModal(cardModal);
+});
+
+const closeModalOnEsc = (event) => {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) closeModal(openedModal);
+  }
+};
 
 initialCards.forEach((card) => {
   const cardElement = getCardElement(card);
