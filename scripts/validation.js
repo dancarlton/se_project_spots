@@ -53,18 +53,14 @@ const toggleButtonState = (inputList, buttonElement, config) => {
 };
 
 const resetValidation = (formElement, config) => {
-  const inputList = Array.from(
-    formElement.querySelectorAll(config.inputSelector)
-  );
+  const inputList = [...formElement.querySelectorAll(config.inputSelector)];
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, config);
   });
 };
 
 const setEventListeners = (formElement, config) => {
-  const inputList = Array.from(
-    formElement.querySelectorAll(config.inputSelector)
-  );
+  const inputList = [...formElement.querySelectorAll(config.inputSelector)];
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement, config);

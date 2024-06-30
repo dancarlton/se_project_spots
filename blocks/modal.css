@@ -100,11 +100,11 @@
   color: #fcf5e5;
 }
 
-.modal__submit-button:hover {
+.modal__submit-button:hover:not(:disabled) {
   opacity: 0.7;
 }
 
-.modal__submit-button_inactive {
+.modal__submit-button_inactive:hover {
   opacity: 0.5;
 }
 

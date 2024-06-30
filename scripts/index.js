@@ -53,12 +53,28 @@ const newPostName = document.querySelector("#card-name");
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalOnEsc);
+  document.addEventListener("keydown", closeModalOnOverlayClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalOnEsc);
+  document.removeEventListener("keydown", closeModalOnOverlayClick);
 }
+
+const closeModalOnEsc = (event) => {
+  if (event.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    if (openedModal) closeModal(openedModal);
+  }
+};
+
+const closeModalOnOverlayClick = () => {
+  const modalMain = document.querySelector(".modal");
+  if (modalMain.contains(".model_opened")) {
+    closeModal(modalMain);
+  }
+};
 
 // Event Listeners
 profileEditButton.addEventListener("click", () => {
@@ -155,13 +171,6 @@ cardModalCloseButton.addEventListener("click", () => {
 cardModalImage.addEventListener("click", () => {
   closeModal(cardModal);
 });
-
-const closeModalOnEsc = (event) => {
-  if (event.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
-    if (openedModal) closeModal(openedModal);
-  }
-};
 
 initialCards.forEach((card) => {
   const cardElement = getCardElement(card);
