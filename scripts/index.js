@@ -53,13 +53,13 @@ const newPostName = document.querySelector("#card-name");
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalOnEsc);
-  document.addEventListener("keydown", closeModalOnOverlayClick);
+  modal.addEventListener("click", closeModalOnOverlayClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalOnEsc);
-  document.removeEventListener("keydown", closeModalOnOverlayClick);
+  modal.removeEventListener("click", closeModalOnOverlayClick);
 }
 
 const closeModalOnEsc = (event) => {
@@ -69,10 +69,15 @@ const closeModalOnEsc = (event) => {
   }
 };
 
-const closeModalOnOverlayClick = () => {
-  const modalMain = document.querySelector(".modal");
-  if (modalMain.contains(".model_opened")) {
-    closeModal(modalMain);
+const closeModalOnOverlayClick = (event) => {
+  const openedModal = document.querySelector(".modal_opened");
+  if (
+    openedModal &&
+    !openedModal
+      .querySelector(".modal__container, .modal__content")
+      .contains(event.target)
+  ) {
+    closeModal(openedModal);
   }
 };
 
