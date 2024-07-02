@@ -101,7 +101,7 @@
 }
 
 .modal__submit-button:hover:not(:disabled) {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .modal__submit-button_inactive:hover {
