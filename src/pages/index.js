@@ -128,25 +128,33 @@ cardElements.modalImage.addEventListener("click", () => {
 function handleProfileFormSubmit(event) {
   event.preventDefault();
 
-  profileElements.nameElement.textContent = profileElements.nameInput.value;
-  profileElements.jobElement.textContent = profileElements.jobInput.value;
-
-  closeModal(profileElements.modal);
+  api
+    .editUserInfo({
+      name: profileElements.nameInput.value,
+      about: profileElements.jobInput.value,
+    })
+    .then((data) => {
+      profileElements.nameElement.textContent = data.name;
+      profileElements.jobElement.textContent = data.about;
+      closeModal(profileElements.modal);
+    });
 }
 
 function handleNewPostFormSubmit(event) {
   event.preventDefault();
 
-  const newCardData = {
-    name: newPostElements.nameInput.value,
-    link: newPostElements.linkInput.value,
-  };
+  api
+    .addNewCard({
+      name: newPostElements.nameInput.value,
+      link: newPostElements.linkInput.value,
+    })
+    .then((data) => {
+      const cardElement = getCardElement(data);
+      cardElements.list.prepend(cardElement);
 
-  const cardElement = getCardElement(newCardData);
-  cardElements.list.prepend(cardElement);
-
-  newPostElements.form.reset();
-  closeModal(newPostElements.modal);
+      newPostElements.form.reset();
+      closeModal(newPostElements.modal);
+    });
 }
 
 // Card Creation Function
@@ -192,11 +200,15 @@ const api = new Api({
 
 api
   .getAppInfo()
-  .then(([cards]) => {
+  .then(([cards, userInfo]) => {
+    // debugger;
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardElements.list.append(cardElement);
     });
+
+    profileElements.nameElement.textContent = userInfo.name;
+    profileElements.jobElement.textContent = userInfo.about;
   })
   .catch((err) => {
     console.error(err);
