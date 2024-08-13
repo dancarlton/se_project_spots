@@ -191,8 +191,8 @@ const api = new Api({
 });
 
 api
-  .getInitialCards()
-  .then((cards) => {
+  .getAppInfo()
+  .then(([cards]) => {
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardElements.list.append(cardElement);
@@ -201,10 +201,6 @@ api
   .catch((err) => {
     console.error(err);
   });
-
-api.getAppInfo().then((cards) => {
-  console.log(cards);
-});
 
 // Enable Form Validation
 enableValidation(validationConfig);
