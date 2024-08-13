@@ -1,6 +1,8 @@
 import "./index.css";
 import { enableValidation, validationConfig } from "../scripts/validation.js";
+import Api from "../utils/Api.js";
 
+// Initial Cards Data
 const initialCards = [
   {
     name: "Val Thorens",
@@ -29,30 +31,38 @@ const initialCards = [
 ];
 
 // Profile Elements
-const profileEditButton = document.querySelector(".profile__edit-button");
-const editProfileModal = document.querySelector("#edit-profile-modal");
-const profileCloseButton = document.querySelector("#close-profile-modal");
-const profileFormElement = document.querySelector("#edit-profile-form");
-const profileNameInput = document.querySelector("#edit-profile-input-name");
-const profileJobInput = document.querySelector(
-  "#edit-profile-input-description"
-);
-const profileNameElement = document.querySelector(".profile__title");
-const profileJobElement = document.querySelector(".profile__description");
+const profileElements = {
+  editButton: document.querySelector(".profile__edit-button"),
+  modal: document.querySelector("#edit-profile-modal"),
+  closeButton: document.querySelector("#close-profile-modal"),
+  form: document.querySelector("#edit-profile-form"),
+  nameInput: document.querySelector("#edit-profile-input-name"),
+  jobInput: document.querySelector("#edit-profile-input-description"),
+  nameElement: document.querySelector(".profile__title"),
+  jobElement: document.querySelector(".profile__description"),
+};
 
 // New Post Elements
-const newPostButton = document.querySelector(".profile__add-button");
-const newPostModal = document.querySelector("#new-post-modal");
-const newPostCloseButton = document.querySelector("#close-new-post-modal");
-const newPostLinkInput = document.querySelector("#new-post-image-link");
-const newPostprofileNameInput = document.querySelector(
-  "#new-post-input-description"
-);
-const newPostFormElement = document.querySelector("#new-post-form");
-const newPostLink = document.querySelector("#card-link");
-const newPostName = document.querySelector("#card-name");
+const newPostElements = {
+  button: document.querySelector(".profile__add-button"),
+  modal: document.querySelector("#new-post-modal"),
+  closeButton: document.querySelector("#close-new-post-modal"),
+  linkInput: document.querySelector("#new-post-image-link"),
+  nameInput: document.querySelector("#new-post-input-description"),
+  form: document.querySelector("#new-post-form"),
+};
 
-// Functions
+// Card Elements
+const cardElements = {
+  template: document.querySelector("#card-template"),
+  list: document.querySelector(".cards__list"),
+  modal: document.querySelector("#preview-modal"),
+  modalImage: document.querySelector(".modal__image"),
+  modalCloseButton: document.querySelector(".modal__close-button"),
+  modalCaption: document.querySelector(".modal__caption"),
+};
+
+// Utility Functions
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalOnEsc);
@@ -85,64 +95,63 @@ const closeModalOnOverlayClick = (event) => {
 };
 
 // Event Listeners
-profileEditButton.addEventListener("click", () => {
-  profileNameInput.value = profileNameElement.textContent;
-  profileJobInput.value = profileJobElement.textContent;
-  openModal(editProfileModal);
+profileElements.editButton.addEventListener("click", () => {
+  profileElements.nameInput.value = profileElements.nameElement.textContent;
+  profileElements.jobInput.value = profileElements.jobElement.textContent;
+  openModal(profileElements.modal);
 });
 
-profileCloseButton.addEventListener("click", () => {
-  closeModal(editProfileModal);
+profileElements.closeButton.addEventListener("click", () => {
+  closeModal(profileElements.modal);
 });
 
-newPostButton.addEventListener("click", () => {
-  openModal(newPostModal);
+newPostElements.button.addEventListener("click", () => {
+  openModal(newPostElements.modal);
 });
 
-newPostCloseButton.addEventListener("click", () => {
-  closeModal(newPostModal);
+newPostElements.closeButton.addEventListener("click", () => {
+  closeModal(newPostElements.modal);
 });
 
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+profileElements.form.addEventListener("submit", handleProfileFormSubmit);
+newPostElements.form.addEventListener("submit", handleNewPostFormSubmit);
 
-newPostFormElement.addEventListener("submit", handleNewPostFormSubmit);
+cardElements.modalCloseButton.addEventListener("click", () => {
+  closeModal(cardElements.modal);
+});
 
-// Form Submissions
+cardElements.modalImage.addEventListener("click", () => {
+  closeModal(cardElements.modal);
+});
+
+// Form Submission Handlers
 function handleProfileFormSubmit(event) {
   event.preventDefault();
 
-  profileNameElement.textContent = profileNameInput.value;
-  profileJobElement.textContent = profileJobInput.value;
+  profileElements.nameElement.textContent = profileElements.nameInput.value;
+  profileElements.jobElement.textContent = profileElements.jobInput.value;
 
-  closeModal(editProfileModal);
+  closeModal(profileElements.modal);
 }
 
 function handleNewPostFormSubmit(event) {
   event.preventDefault();
 
   const newCardData = {
-    name: newPostprofileNameInput.value,
-    link: newPostLinkInput.value,
+    name: newPostElements.nameInput.value,
+    link: newPostElements.linkInput.value,
   };
 
   const cardElement = getCardElement(newCardData);
-  cardList.prepend(cardElement);
+  cardElements.list.prepend(cardElement);
 
-  newPostFormElement.reset();
-  // toggleButtonState(buttonElement);
-  closeModal(newPostModal);
+  newPostElements.form.reset();
+  closeModal(newPostElements.modal);
 }
 
-// Card Element
-const cardTemplate = document.querySelector("#card-template");
-const cardList = document.querySelector(".cards__list");
-const cardModal = document.querySelector("#preview-modal");
-const cardModalImage = cardModal.querySelector(".modal__image");
-const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
-const cardModalCaption = cardModal.querySelector(".modal__caption");
-
+// Card Creation Function
 function getCardElement(data) {
-  const cardElement = cardTemplate.content
+  const cardElement = cardElements.template.content
     .querySelector(".card")
     .cloneNode(true);
   const cardTitle = cardElement.querySelector(".card__title");
@@ -163,26 +172,39 @@ function getCardElement(data) {
   });
 
   cardImage.addEventListener("click", () => {
-    cardModalCaption.textContent = data.name;
-    cardModalImage.src = data.link;
-    cardModalImage.alt = data.name;
-    openModal(cardModal);
+    cardElements.modalCaption.textContent = data.name;
+    cardElements.modalImage.src = data.link;
+    cardElements.modalImage.alt = data.name;
+    openModal(cardElements.modal);
   });
 
   return cardElement;
 }
 
-cardModalCloseButton.addEventListener("click", () => {
-  closeModal(cardModal);
+// API Setup
+const api = new Api({
+  baseURL: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "85d7a969-7c91-4070-b3f0-78f45cb1eb48",
+    "Content-Type": "application/json",
+  },
 });
 
-cardModalImage.addEventListener("click", () => {
-  closeModal(cardModal);
+api
+  .getInitialCards()
+  .then((cards) => {
+    cards.forEach((card) => {
+      const cardElement = getCardElement(card);
+      cardElements.list.append(cardElement);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+api.getAppInfo().then((cards) => {
+  console.log(cards);
 });
 
-initialCards.forEach((card) => {
-  const cardElement = getCardElement(card);
-  cardList.append(cardElement);
-});
-
+// Enable Form Validation
 enableValidation(validationConfig);
