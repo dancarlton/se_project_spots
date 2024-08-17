@@ -159,6 +159,7 @@ function handleNewPostFormSubmit(event) {
 
 // Card Creation Function
 function getCardElement(data) {
+  // debugger;
   const cardElement = cardElements.template.content
     .querySelector(".card")
     .cloneNode(true);
@@ -167,6 +168,7 @@ function getCardElement(data) {
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
 
+  const cardID = data._id;
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
   cardImage.alt = data.name;
@@ -176,7 +178,9 @@ function getCardElement(data) {
   });
 
   cardDeleteButton.addEventListener("click", () => {
-    cardElement.remove();
+    currentCardElement = cardElement;
+    currentCardID = cardID;
+    openModal(deleteModal);
   });
 
   cardImage.addEventListener("click", () => {
@@ -188,6 +192,68 @@ function getCardElement(data) {
 
   return cardElement;
 }
+
+// Edit Avatar Modal
+const avatarModal = document.querySelector("#edit-avatar-modal");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarProfileButton = document.querySelector(".profile__avatar-button");
+const avatarSubmitButton = avatarModal.querySelector(".modal__submit-button");
+const avatarModalCloseButton = avatarModal.querySelector(
+  ".modal__close-button"
+);
+const avatarInput = avatarModal.querySelector("#edit-avatar-input-link");
+const profileAvatarImage = document.querySelector(".profile__avatar");
+
+avatarProfileButton.addEventListener("click", () => {
+  openModal(avatarModal);
+});
+
+avatarModalCloseButton.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
+
+avatarForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const avatarUrl = avatarInput.value;
+
+  api
+    .editAvatar(avatarUrl)
+    .then((data) => {
+      profileAvatarImage.src = data.avatar;
+      closeModal(avatarModal);
+    })
+    .catch((err) => {
+      console.error(`Error: ${err}`);
+    });
+});
+
+// Delete Modal
+const deleteModal = document.querySelector("#delete-modal");
+const deleteModalForm = document.querySelector("#delete-modal-form");
+const cancelButton = document.querySelector(".modal__cancel-button");
+const closeButton = document.querySelector(".modal__close-button");
+
+let currentCardElement;
+let currentCardID;
+
+deleteModalForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  api.deleteCard(currentCardID).then(() => {
+    currentCardElement.remove();
+  });
+
+  closeModal(deleteModal);
+});
+
+cancelButton.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
+
+closeButton.addEventListener("click", () => {
+  closeModal(deleteModal);
+});
 
 // API Setup
 const api = new Api({

@@ -65,4 +65,34 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+
+  deleteCard(cardID) {
+    return fetch(`${this._baseURL}/cards/${cardID}`, {
+      method: "DELETE",
+      headers: this._headers,
+      body: JSON.stringify({
+        cardID,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  editAvatar(avatar) {
+    return fetch(`${this._baseURL}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }
