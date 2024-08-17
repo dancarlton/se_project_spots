@@ -128,6 +128,12 @@ cardElements.modalImage.addEventListener("click", () => {
 function handleProfileFormSubmit(event) {
   event.preventDefault();
 
+  const submitButton = profileElements.form.querySelector(
+    ".modal__submit-button"
+  );
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Saving...";
+
   api
     .editUserInfo({
       name: profileElements.nameInput.value,
@@ -137,11 +143,23 @@ function handleProfileFormSubmit(event) {
       profileElements.nameElement.textContent = data.name;
       profileElements.jobElement.textContent = data.about;
       closeModal(profileElements.modal);
+    })
+    .catch((err) => {
+      console.error(`Error: ${err}`);
+    })
+    .finally(() => {
+      submitButton.textContent = originalText;
     });
 }
 
 function handleNewPostFormSubmit(event) {
   event.preventDefault();
+
+  const submitButton = newPostElements.form.querySelector(
+    ".modal__submit-button"
+  );
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Saving...";
 
   api
     .addNewCard({
@@ -154,12 +172,17 @@ function handleNewPostFormSubmit(event) {
 
       newPostElements.form.reset();
       closeModal(newPostElements.modal);
+    })
+    .catch((err) => {
+      console.error(`Error: ${err}`);
+    })
+    .finally(() => {
+      submitButton.textContent = originalText;
     });
 }
 
 // Card Creation Function
 function getCardElement(data) {
-  // debugger;
   const cardElement = cardElements.template.content
     .querySelector(".card")
     .cloneNode(true);
@@ -173,8 +196,35 @@ function getCardElement(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
+  // Set the initial state of the like button
+  if (data.isLiked) {
+    cardLikeButton.classList.add("card__like-button_liked");
+  }
+
   cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("card__like-button_liked");
+    const isLiked = cardLikeButton.classList.contains(
+      "card__like-button_liked"
+    );
+
+    if (isLiked) {
+      api
+        .deleteLike(cardID)
+        .then((updatedCard) => {
+          cardLikeButton.classList.remove("card__like-button_liked");
+        })
+        .catch((err) => {
+          console.error(`Error: ${err}`);
+        });
+    } else {
+      api
+        .addLike(cardID)
+        .then((updatedCard) => {
+          cardLikeButton.classList.add("card__like-button_liked");
+        })
+        .catch((err) => {
+          console.error(`Error: ${err}`);
+        });
+    }
   });
 
   cardDeleteButton.addEventListener("click", () => {
@@ -215,6 +265,10 @@ avatarModalCloseButton.addEventListener("click", () => {
 avatarForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  const submitButton = avatarForm.querySelector(".modal__submit-button");
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Saving...";
+
   const avatarUrl = avatarInput.value;
 
   api
@@ -225,6 +279,9 @@ avatarForm.addEventListener("submit", (event) => {
     })
     .catch((err) => {
       console.error(`Error: ${err}`);
+    })
+    .finally(() => {
+      submitButton.textContent = originalText;
     });
 });
 
@@ -240,11 +297,22 @@ let currentCardID;
 deleteModalForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  api.deleteCard(currentCardID).then(() => {
-    currentCardElement.remove();
-  });
+  const submitButton = deleteModalForm.querySelector(".modal__submit-button");
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Deleting...";
 
-  closeModal(deleteModal);
+  api
+    .deleteCard(currentCardID)
+    .then(() => {
+      currentCardElement.remove();
+      closeModal(deleteModal);
+    })
+    .catch((err) => {
+      console.error(`Error: ${err}`);
+    })
+    .finally(() => {
+      submitButton.textContent = originalText;
+    });
 });
 
 cancelButton.addEventListener("click", () => {
@@ -254,6 +322,8 @@ cancelButton.addEventListener("click", () => {
 closeButton.addEventListener("click", () => {
   closeModal(deleteModal);
 });
+
+// Update Likes to Card
 
 // API Setup
 const api = new Api({
