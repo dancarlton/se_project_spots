@@ -1,5 +1,9 @@
 import "./index.css";
-import { enableValidation, validationConfig } from "../scripts/validation.js";
+import {
+  disableSubmitButton,
+  enableValidation,
+  validationConfig,
+} from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
 // Initial Cards Data
@@ -84,12 +88,7 @@ const closeModalOnEsc = (event) => {
 
 const closeModalOnOverlayClick = (event) => {
   const openedModal = document.querySelector(".modal_opened");
-  if (
-    openedModal &&
-    !openedModal
-      .querySelector(".modal__container, .modal__content")
-      .contains(event.target)
-  ) {
+  if (event.target.classList.contains("modal")) {
     closeModal(openedModal);
   }
 };
@@ -178,6 +177,7 @@ function handleNewPostFormSubmit(event) {
     })
     .finally(() => {
       submitButton.textContent = originalText;
+      disableSubmitButton(submitButton, validationConfig);
     });
 }
 
@@ -289,7 +289,7 @@ avatarForm.addEventListener("submit", (event) => {
 const deleteModal = document.querySelector("#delete-modal");
 const deleteModalForm = document.querySelector("#delete-modal-form");
 const cancelButton = document.querySelector(".modal__cancel-button");
-const closeButton = document.querySelector(".modal__close-button");
+const closeButton = document.querySelector("#close-delete-modal");
 
 let currentCardElement;
 let currentCardID;
@@ -323,8 +323,6 @@ closeButton.addEventListener("click", () => {
   closeModal(deleteModal);
 });
 
-// Update Likes to Card
-
 // API Setup
 const api = new Api({
   baseURL: "https://around-api.en.tripleten-services.com/v1",
@@ -345,6 +343,7 @@ api
 
     profileElements.nameElement.textContent = userInfo.name;
     profileElements.jobElement.textContent = userInfo.about;
+    profileAvatarImage.src = userInfo.avatar;
   })
   .catch((err) => {
     console.error(err);
