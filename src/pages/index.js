@@ -1,37 +1,10 @@
 import "./index.css";
-import {
-  disableSubmitButton,
-  enableValidation,
-  validationConfig,
-} from "../scripts/validation.js";
+import { enableValidation, validationConfig } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
 // Initial Cards Data
 const initialCards = [
-  {
-    name: "Val Thorens",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-  {
-    name: "Restaurant terrace",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-  },
-  {
-    name: "An outdoor cafe",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-  },
-  {
-    name: "A very long bridge, over the forest and through the trees",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-  },
-  {
-    name: "Tunnel with morning light",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-  },
-  {
-    name: "Mountain house",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
+  // Initial card objects go here...
 ];
 
 // Profile Elements
@@ -87,9 +60,8 @@ const closeModalOnEsc = (event) => {
 };
 
 const closeModalOnOverlayClick = (event) => {
-  const openedModal = document.querySelector(".modal_opened");
   if (event.target.classList.contains("modal")) {
-    closeModal(openedModal);
+    closeModal(event.target);
   }
 };
 
@@ -119,10 +91,6 @@ cardElements.modalCloseButton.addEventListener("click", () => {
   closeModal(cardElements.modal);
 });
 
-cardElements.modalImage.addEventListener("click", () => {
-  closeModal(cardElements.modal);
-});
-
 // Form Submission Handlers
 function handleProfileFormSubmit(event) {
   event.preventDefault();
@@ -143,11 +111,18 @@ function handleProfileFormSubmit(event) {
       profileElements.jobElement.textContent = data.about;
       closeModal(profileElements.modal);
     })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    })
+    .catch((err) => console.error(`Error: ${err}`))
     .finally(() => {
       submitButton.textContent = originalText;
+      toggleButtonState(
+        [
+          ...profileElements.form.querySelectorAll(
+            validationConfig.inputSelector
+          ),
+        ],
+        submitButton,
+        validationConfig
+      );
     });
 }
 
@@ -168,16 +143,21 @@ function handleNewPostFormSubmit(event) {
     .then((data) => {
       const cardElement = getCardElement(data);
       cardElements.list.prepend(cardElement);
-
       newPostElements.form.reset();
       closeModal(newPostElements.modal);
     })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    })
+    .catch((err) => console.error(`Error: ${err}`))
     .finally(() => {
       submitButton.textContent = originalText;
-      disableSubmitButton(submitButton, validationConfig);
+      toggleButtonState(
+        [
+          ...newPostElements.form.querySelectorAll(
+            validationConfig.inputSelector
+          ),
+        ],
+        submitButton,
+        validationConfig
+      );
     });
 }
 
@@ -196,7 +176,6 @@ function getCardElement(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
-  // Set the initial state of the like button
   if (data.isLiked) {
     cardLikeButton.classList.add("card__like-button_liked");
   }
@@ -209,21 +188,17 @@ function getCardElement(data) {
     if (isLiked) {
       api
         .deleteLike(cardID)
-        .then((updatedCard) => {
+        .then(() => {
           cardLikeButton.classList.remove("card__like-button_liked");
         })
-        .catch((err) => {
-          console.error(`Error: ${err}`);
-        });
+        .catch((err) => console.error(`Error: ${err}`));
     } else {
       api
         .addLike(cardID)
-        .then((updatedCard) => {
+        .then(() => {
           cardLikeButton.classList.add("card__like-button_liked");
         })
-        .catch((err) => {
-          console.error(`Error: ${err}`);
-        });
+        .catch((err) => console.error(`Error: ${err}`));
     }
   });
 
@@ -277,9 +252,7 @@ avatarForm.addEventListener("submit", (event) => {
       profileAvatarImage.src = data.avatar;
       closeModal(avatarModal);
     })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    })
+    .catch((err) => console.error(`Error: ${err}`))
     .finally(() => {
       submitButton.textContent = originalText;
     });
@@ -307,21 +280,14 @@ deleteModalForm.addEventListener("submit", (event) => {
       currentCardElement.remove();
       closeModal(deleteModal);
     })
-    .catch((err) => {
-      console.error(`Error: ${err}`);
-    })
+    .catch((err) => console.error(`Error: ${err}`))
     .finally(() => {
       submitButton.textContent = originalText;
     });
 });
 
-cancelButton.addEventListener("click", () => {
-  closeModal(deleteModal);
-});
-
-closeButton.addEventListener("click", () => {
-  closeModal(deleteModal);
-});
+cancelButton.addEventListener("click", () => closeModal(deleteModal));
+closeButton.addEventListener("click", () => closeModal(deleteModal));
 
 // API Setup
 const api = new Api({
@@ -335,7 +301,6 @@ const api = new Api({
 api
   .getAppInfo()
   .then(([cards, userInfo]) => {
-    // debugger;
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardElements.list.append(cardElement);
@@ -345,9 +310,7 @@ api
     profileElements.jobElement.textContent = userInfo.about;
     profileAvatarImage.src = userInfo.avatar;
   })
-  .catch((err) => {
-    console.error(err);
-  });
+  .catch((err) => console.error(err));
 
 // Enable Form Validation
 enableValidation(validationConfig);
