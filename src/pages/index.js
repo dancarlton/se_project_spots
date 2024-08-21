@@ -114,15 +114,6 @@ function handleProfileFormSubmit(event) {
     .catch((err) => console.error(`Error: ${err}`))
     .finally(() => {
       submitButton.textContent = originalText;
-      toggleButtonState(
-        [
-          ...profileElements.form.querySelectorAll(
-            validationConfig.inputSelector
-          ),
-        ],
-        submitButton,
-        validationConfig
-      );
     });
 }
 
@@ -149,15 +140,6 @@ function handleNewPostFormSubmit(event) {
     .catch((err) => console.error(`Error: ${err}`))
     .finally(() => {
       submitButton.textContent = originalText;
-      toggleButtonState(
-        [
-          ...newPostElements.form.querySelectorAll(
-            validationConfig.inputSelector
-          ),
-        ],
-        submitButton,
-        validationConfig
-      );
     });
 }
 
