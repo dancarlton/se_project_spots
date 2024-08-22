@@ -44,12 +44,14 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalOnEsc);
   modal.addEventListener("click", closeModalOnOverlayClick);
+  modal.addEventListener("click", closeModalOnButtonClick);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalOnEsc);
   modal.removeEventListener("click", closeModalOnOverlayClick);
+  modal.removeEventListener("click", closeModalOnButtonClick);
 }
 
 const closeModalOnEsc = (event) => {
@@ -61,7 +63,13 @@ const closeModalOnEsc = (event) => {
 
 const closeModalOnOverlayClick = (event) => {
   if (event.target.classList.contains("modal")) {
-    closeModal(event.target);
+    closeModal(event.currentTarget);
+  }
+};
+
+const closeModalOnButtonClick = (event) => {
+  if (event.target.classList.contains("modal__close-button")) {
+    closeModal(event.currentTarget);
   }
 };
 
