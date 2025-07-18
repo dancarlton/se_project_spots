@@ -13,7 +13,6 @@
       content="Coffee Shop, specialty coffee, pastries, cozy atmosphere, relaxing, working, friends, cafe, coffee experience"
     />
     <title>Spots</title>
-    <link rel="icon" href="favicon.ico" />
   </head>
   <body>
     <div class="page">
@@ -26,14 +25,19 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="Bessie Coleman"
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-button">
+              <img
+                class="profile__pencil-icon"
+                src="<%=require('./images/pencil-light.svg')%>"
+                alt="Pencil Icon"
+              />
+            </button>
+            <img src="" alt="" class="profile__avatar" />
+          </div>
           <div class="profile__column">
-            <h1 class="profile__title block">Bessie Coleman</h1>
-            <p class="profile__description block">Civil Aviator</p>
+            <h1 class="profile__title block"></h1>
+            <p class="profile__description block"></p>
             <button type="button" class="profile__edit-button">
               Edit Profile
             </button>
@@ -101,6 +105,48 @@
               <span
                 class="modal__error"
                 id="edit-profile-input-description-error"
+              ></span>
+            </label>
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Edit Avatar Modal -->
+      <div class="modal" id="edit-avatar-modal">
+        <div class="modal__container">
+          <button
+            type="button"
+            class="modal__close-button modal__close-button-edit-avatar"
+            id="close-avatar-modal"
+          >
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M20 0v40M0 20h40"
+                fill="none"
+                stroke="#212121"
+                stroke-width="4"
+                transform="rotate(45 20 20)"
+              />
+            </svg>
+          </button>
+          <h2 class="modal__title">Edit profile avatar</h2>
+          <form name="edit-avatar" class="modal__form" id="edit-avatar-form">
+            <label for="edit-avatar-input-link" class="modal__label">
+              Profile Picture
+              <input
+                id="edit-avatar-input-link"
+                name="avatar-link"
+                type="url"
+                class="modal__input"
+                placeholder="Paste the link to an image"
+                required
+                minlength="2"
+                maxlength="200"
+              />
+              <span
+                class="modal__error"
+                id="edit-avatar-input-link-error"
               ></span>
             </label>
             <button type="submit" class="modal__submit-button">Save</button>
@@ -187,6 +233,42 @@
       </div>
     </div>
 
-    <script type="module" src="scripts/index.js"></script>
+    <!-- Delete Modal -->
+    <div class="modal" id="delete-modal">
+      <div class="modal__container modal__container-delete">
+        <button
+          type="button"
+          class="modal__close-button"
+          id="close-delete-modal"
+        >
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20 0v40M0 20h40"
+              fill="none"
+              stroke="#212121"
+              stroke-width="4"
+              transform="rotate(45 20 20)"
+            />
+          </svg>
+        </button>
+        <h2 class="modal__title">
+          Are you sure you want to delete this image?
+        </h2>
+        <form
+          name="delete-modal-form"
+          class="modal__form"
+          id="delete-modal-form"
+        >
+          <button
+            type="submit"
+            class="modal__submit-button"
+            id="modal__delete-button"
+          >
+            Delete
+          </button>
+          <button type="button" class="modal__cancel-button">Cancel</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
